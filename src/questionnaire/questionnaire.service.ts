@@ -12,12 +12,21 @@ export class QuestionnaireService {
   ) {}
 
   create(createQuestionnaireDto: CreateQuestionnaireDto) {
-    const questionnaire = this.questionnaireRepository.create(createQuestionnaireDto);
+    const questionnaire = this.questionnaireRepository.create(
+      createQuestionnaireDto,
+    );
     return this.questionnaireRepository.save(questionnaire);
   }
 
-  findAll() {
-    return this.questionnaireRepository.find();
+  async findAll({ page, pageSize }) {
+    const [items, totalCount] = await this.questionnaireRepository.findAndCount(
+      {
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      },
+    );
+
+    return { items, totalCount };
   }
 
   findOne(id: number) {

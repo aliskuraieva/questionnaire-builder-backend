@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Delete, Query } from '@nestjs/common';
 import { QuestionnaireService } from './questionnaire.service';
 import { CreateQuestionnaireDto } from '../dto/create-questionnaire.dto';
 
@@ -12,8 +12,11 @@ export class QuestionnaireController {
   }
 
   @Get()
-  findAll() {
-    return this.questionnaireService.findAll();
+  findAll(
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize: number = 10
+  ) {
+    return this.questionnaireService.findAll({ page, pageSize });
   }
 
   @Get(':id')
