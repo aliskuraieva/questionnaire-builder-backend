@@ -11,7 +11,12 @@ export class Questionnaire {
   @Column()
   title: string;
 
-  @OneToMany(() => Question, (question) => question.questionnaire)
+  @Column({ nullable: true })
+  description: string;
+
+  @OneToMany(() => Question, (question) => question.questionnaire, {
+    cascade: true,
+  })
   questions: Question[];
 
   @OneToMany(() => Answer, (answer) => answer.questionnaire)

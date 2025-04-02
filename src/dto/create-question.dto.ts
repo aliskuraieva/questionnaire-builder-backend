@@ -1,6 +1,15 @@
+import { IsString, IsArray } from 'class-validator';
+
 export class CreateQuestionDto {
-    questionText: string;
-    type: string;
-    questionnaireId: number;
-  }
-  
+  @IsString()
+  questionText: string;
+
+  @IsString()
+  type: 'text' | 'single-choice' | 'multiple-choice';
+
+  @IsArray()
+  choices: string[];
+
+  @IsArray()
+  answers: string[];
+}

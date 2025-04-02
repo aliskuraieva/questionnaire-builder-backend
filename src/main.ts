@@ -17,11 +17,7 @@ async function bootstrap() {
     }),
   );
 
-  app.enableCors({
-    origin: process.env.CORS_ORIGIN,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept, Authorization',
-});
+  app.enableCors();
 
 
   const config = new DocumentBuilder()

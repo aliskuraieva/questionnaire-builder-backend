@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import * as path from 'path';
 
 @Module({
@@ -26,8 +25,7 @@ import * as path from 'path';
           ? { rejectUnauthorized: false }
           : undefined,
     }),
+    QuestionnaireModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

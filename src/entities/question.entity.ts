@@ -1,14 +1,7 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Questionnaire } from './questionnaire.entity';
-import { Answer } from './answer.entity';
 
-@Entity('questions')
+@Entity()
 export class Question {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,9 +12,13 @@ export class Question {
   @Column()
   type: string;
 
+  @Column('text', { array: true })
+  choices: string[];
+
+  @Column('text', { array: true })
+  answers: string[];
+
   @ManyToOne(() => Questionnaire, (questionnaire) => questionnaire.questions)
   questionnaire: Questionnaire;
-
-  @OneToMany(() => Answer, (answer) => answer.question)
-  answers: Answer[];
 }
+
